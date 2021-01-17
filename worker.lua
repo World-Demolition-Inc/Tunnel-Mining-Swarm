@@ -7,7 +7,7 @@
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Author: Captain Oppai
 # Author Discord: Jisatsu#1987
-# Github Project Repo: 
+# Github Project Repo: https://github.com/World-Demolition-Inc/Tunnel-Mining-Swarm
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Copyright 2021 Captain-Oppai
 #
@@ -27,6 +27,9 @@
 # If you'd like to take this project and take it your own way, making your own repo that's perfectly fine but do be aware this script is licened under the GPL-2.0 license.
 # The copyright information in this script or the license may not be removed, but the code can be freely modified beyond that and distributed. If you're curious about the license
 # there is a link further up this copyright header.
+#
+# If there happens to be an issue you come across you can either fix it yourself or post a issue on the 'Issues' tab of the repository this is derived from.
+# (This does not always apply if this script is from a repository other than the one that is listed above.)
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --]]
@@ -64,6 +67,10 @@ local bool, table
 
 local miningDepth
 
+-- !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! 
+-- Make sure to add the items you'd like the workers to keep in this list here. If you do not than the worker will drop it.
+-- This includes the ore version and mined version of it (assuming it has one, ores like diamons and redstone.)
+
 local goodOres = {
 "minecraft:iron_ore",
 "minecraft:diamond_ore",
@@ -77,8 +84,12 @@ local goodOres = {
 "minecraft:lapis_ore",
 "minecraft:lapis_lazuli"}
 
+-- Add items that are fuel, these will be deposited into the fuel chest rather than the 'goodOres' chest.
+
 local fuel = {"minecraft:coal",
 "minecraft:coal_block"}
+
+-- There are some redundant functions here I know, haven't gotten around cleaning it up.
 
 local function moveForwardProtect()
     local loop = true
