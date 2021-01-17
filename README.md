@@ -4,6 +4,8 @@ Do read the README repository that's hosted on this organization, it contains so
 
 I'll add more info to this readme here and there, so star the repo if you're interested on updates.
 
+-------------------------------------------------------------------------------------------------------------------------------------
+
 Author: Captain Oppai
 
 Author's Discord: Jisatsu#1987
@@ -11,6 +13,8 @@ Author's Discord: Jisatsu#1987
 Major contributers:
 
 (__Members within the org. and constributed heavily to this repo will be added to this list.__)
+
+-------------------------------------------------------------------------------------------------------------------------------------
 
 Master.lua: Master turtle, sets up the mining operation.
 
