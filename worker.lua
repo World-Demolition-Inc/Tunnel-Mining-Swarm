@@ -235,7 +235,7 @@ local function getData()
         modem.transmit(serverChannel, serverChannel, "Get Data")
         event, _, senderChannel, replyChannel, message = os.pullEvent("modem_message")
         if(message ~= nil) then
-            loop == false
+            loop = false
         end
         if(loop == false) then
             messageArray = textutils.unserialise(message)

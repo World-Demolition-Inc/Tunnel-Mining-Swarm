@@ -31,4 +31,22 @@ Worker usage: Installed onto a disk, MUST be labeled as startup.lua.
 
 Server and Master will ask questions and guide you through the process. Make sure to setup the server and make a disk prior to trying to run the master system.
 
-I'll probably make a video on the operation of these systems eventually, but most info can be found in the header of the files.
+Demo of the system:
+
+https://dump.captainoppai.com/MiningSwarmDemo.mp4
+
+Software was acting up a bit so the audio recording is a bit odd but it's fine, also this was made at 8 am so I'm super tired during the making of this. I hope the video helps you out some.
+
+Pastebins:
+
+#Master
+
+pastebin get k98am0Jx master.lua
+
+#Server
+
+pastebin get GuMr9kv2 startup.lua
+
+#Worker
+
+pastebin get r3ZQT7m7 startup.lua
