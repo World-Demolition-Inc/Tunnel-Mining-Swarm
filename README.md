@@ -10,6 +10,10 @@ Author: Captain Oppai
 
 Author's Discord: Jisatsu#1987
 
+Project Version: __0.1__
+
+BETA (Cannot guarantee this will work every time without flaw, if you encounter issues you can contact me on discord or make a issue post.)
+
 Major contributers:
 
 (__Members within the org. and constributed heavily to this repo will be added to this list.__)
