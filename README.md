@@ -37,7 +37,7 @@ Server and Master will ask questions and guide you through the process. Make sur
 
 Demo of the system:
 
-https://dump.captainoppai.com/MiningSwarmDemo.mp4
+https://www.youtube.com/watch?v=ev_Qu6ammnw
 
 Software was acting up a bit so the audio recording is a bit odd but it's fine, also this was made at 8 am so I'm super tired during the making of this. I hope the video helps you out some.
 
