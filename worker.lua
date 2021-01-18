@@ -21,14 +21,18 @@
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # File description and information:
 #
+# This file is to be put onto a disk which will then be given to the master turtle during setup. The disk is used to automatically boot this script onto workers being deployed
+# in a mining operation. This script contains 5 major routines, after the completion of these 5 routines it'll repeat again if there are more tunnels needed to be mined.
+# I will not be able to put as much description in this script as it is a lot more vast compared to the others, I'll try to comment functions within this code and explain what they do.
+#
 # This file might be updated will general improvements or commenting, any updates will be posted to the github repo.
 # If you'd like to make your own modifications you can make a pull request if you'd like the changes to be pushed to the main branch.
 # Make sure to identify yourself on your revisions, a comment to show you are who changed the piece of code.
-# If you'd like to take this project and take it your own way, making your own repo that's perfectly fine but do be aware this script is licened under the GPL-2.0 license.
+# If you'd like to take this project and take it your own way, making your own repo that's perfectly fine but do be aware this script is licensed under the GPL-2.0 license.
 # The copyright information in this script or the license may not be removed, but the code can be freely modified beyond that and distributed. If you're curious about the license
 # there is a link further up this copyright header.
 #
-# If there happens to be an issue you come across you can either fix it yourself or post a issue on the 'Issues' tab of the repository this is derived from.
+# If there happens to be an issue you come across you can either fix it yourself or post an issue on the 'Issues' tab of the repository this is derived from.
 # (This does not always apply if this script is from a repository other than the one that is listed above.)
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -68,8 +72,8 @@ local bool, table
 local miningDepth
 
 -- !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! !ALERT! 
--- Make sure to add the items you'd like the workers to keep in this list here. If you do not than the worker will drop it.
--- This includes the ore version and mined version of it (assuming it has one, ores like diamons and redstone.)
+-- Make sure to add the items you'd like the workers to keep in this list here. If you do not then the worker will drop it.
+-- This includes the ore version and mined version of it (assuming it has one, ores like diamonds and redstone.)
 
 local goodOres = {
 "minecraft:iron_ore",
@@ -90,6 +94,11 @@ local fuel = {"minecraft:coal",
 "minecraft:coal_block"}
 
 -- There are some redundant functions here I know, haven't gotten around cleaning it up.
+
+-- These movement protect functions are for ensuring the worker moves forward,
+-- it does this by checking to see if the movement has completed and if it has not
+-- then it will attack and dig, it'll repeat this until the worker returns true
+-- to moving.
 
 local function moveForwardProtect()
     local loop = true
@@ -149,6 +158,8 @@ local function moveForwardProtectDig()
     end
 end
 
+-- This function will check the list 'goodOres' and return true if the value is within the list.
+
 local function contain(element)
     for _, value in pairs(goodOres) do
         if value == element then
@@ -158,6 +169,8 @@ local function contain(element)
     return false
 end
 
+-- This function is the same as the above but checks if it is in the 'fuel' list.
+
 local function containFuel(element)
     for _, value in pairs(fuel) do
         if value == element then
@@ -166,6 +179,8 @@ local function containFuel(element)
     end
     return false
 end
+
+-- This routine will check all the slots in the turtle and drop the item if it's not within the goodOre list.
 
 local function blacklistRoutine()
     for i = 1, 16 do
@@ -178,6 +193,8 @@ local function blacklistRoutine()
         end
     end
 end
+
+-- To make sure that workers do not destroy each other this routine will activate before moving.
 
 local function waitForBrother()
     local wait = true
@@ -210,6 +227,10 @@ local function waitForBrotherDown()
     end
 end
 
+-- This is used for when the tunnel has been labeled as complete, most likely will be changed
+-- when id persistence is not required, or it'll be kept for legacy use.
+-- This routine will also make sure the master turtle returns when everything is done.
+
 local function returnUp()
     print("Returning to surface.")
     modem.transmit(masterChannel, masterChannel, "return")
@@ -228,6 +249,8 @@ local function returnUp()
     modem.transmit(masterChannel, masterChannel, "retrieve")
     os.reboot()
 end
+
+-- This'll get data from the server and then sort the data into the required variables.
 
 local function getData()
     local loop = true
@@ -256,9 +279,13 @@ local function getData()
 
 end
 
+-- Simply declares if the tunnel is done.
+
 local function markDone()
     modem.transmit(serverChannel, serverChannel, "Mark done")
 end
+
+-- Inspect functions just to sort it into separate vars.
 
 local function inspect()
     bool, table = turtle.inspect()
@@ -271,6 +298,8 @@ end
 local function inspectDown()
     bool, table = turtle.inspectDown()
 end
+
+-- This is just a mess... It works as-is, it probably can be optimized a lot but as of now... here it is.
 
 local function miningRoutine()
     turtle.digDown()
@@ -486,6 +515,9 @@ local function miningRoutine()
     end
 end
 
+-- When the tunnel is done this function will be called to have the turtle return to the main operation point.
+-- Also deposits all the goodies the worker has.
+
 local function returnRoutine()
     moveDownProtect()
     turtle.turnLeft()
@@ -575,6 +607,8 @@ local function returnRoutine()
     turtle.turnLeft()
 
 end
+
+-- This is the bot getting ready to start it's tunnel, fueling up and going to the designated tunnel.
 
 local function robotReset()
     waitForBrother()
